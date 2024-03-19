@@ -1,5 +1,4 @@
 <?php
-// Assuming your SQLite database is named 'users.db' and located in the same directory as this PHP script
 $db = new SQLite3('admin/users.db');
 
 // Function to authenticate user credentials
@@ -22,17 +21,19 @@ function authenticateUser($username, $password, $db) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
-
+	
     // Authenticate the user
     $user = authenticateUser($username, $password, $db);
-	echo "test";
+	
     if ($user) {
-        // Redirect users based on their role
+        if(session_status() === PHP_SESSION_NONE) session_start();
         if ($user['admin'] == 1) {
+	    $_SESSION['user'] = "adminUser9876!";
             header("Location: admin/");
             exit();
         } else {
-            header("Location: users/{$user['username']}/");
+	    $_SESSION['user'] = $username;
+            header("Location: users/{$user['username']}/admin");
             exit();
         }
     } else {
@@ -48,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login</title>
 </head>
 <body>
-    <h2>Login</h2>
+    <h2 class="header">Login</h2>
     <?php if(isset($error_message)) echo "<p>$error_message</p>"; ?>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <label for="username">Username:</label>
