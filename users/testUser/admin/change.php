@@ -5,9 +5,9 @@
     //exit;
 //}
 
-
 //get file name from post
-$file = '../'.$_POST['fileName'];
+$fullfile = '../'.$_POST['fileName'];
+$file = $_POST['fileName'];
 //$file = '../index.php'; // Specify the file name
 
 // Check if the form is submitted
@@ -16,15 +16,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['content'])) {
     $editedContent = $_POST['content'];
 
     // Write the edited content back to the file
-    file_put_contents($file, $editedContent);
+    file_put_contents($fullfile, $editedContent);
 
     // Redirect back to the same page after saving
-    header("Location: {$_SERVER['PHP_SELF']}");
-    exit;
+    //header("Location: {$_SERVER['PHP_SELF']}");
+    //exit;
 }
 
 // Read the content from the file
-$content = file_get_contents($file);
+$content = file_get_contents($fullfile);
 ?>
 
 <!DOCTYPE html>
@@ -35,9 +35,10 @@ $content = file_get_contents($file);
     <title>Edit File</title>
 </head>
 <body>
-    <h2>Edit File</h2>
+    <h2>Edit File <?php echo $file; ?></h2>
     <form method="post">
-        <textarea name="content" rows="10" cols="50"><?php echo htmlspecialchars($content); ?></textarea><br>
+        <textarea name="content" rows="40" cols="150"><?php echo htmlspecialchars($content); ?></textarea><br>
+		<input name="fileName" type="hidden" value="<?php echo $file ?>">
         <input type="submit" value="Save">
     </form>
 </body>
