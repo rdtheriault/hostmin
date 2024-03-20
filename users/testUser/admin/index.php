@@ -14,7 +14,11 @@ if (strtolower($_SESSION['user']) != strtolower($folders[2])){
 
 // Get the directory to list (default to the current directory)
 if (isset($_POST['fileName'])){
-	$directory =  $_POST['fileName'];
+	if ($_POST['fileName'] == ".."){
+		$directory = "../";
+	}else{
+		$directory =  $_POST['fileName'];
+	}
 }
 else{
 	$directory = "../";
@@ -61,14 +65,28 @@ function listFilesAndFolders($dir, $folder) {
             // Loop through all the items in the directory
             while (($item = readdir($dh)) !== false) {
                 // Skip . and .. directories
-                if ($item != '.' && $item != '..' && $item != 'admin') {
-                    // If it's a directory, make it clickable
-                    if (is_dir("$dir/$item")) {
-                        echo "<div class='file' onclick=\"postFolderName('../$item')\">$item</div><br>";
-                    } else {
-                        // If it's a file, make the name clickable and post its name to another page
-                        echo "<div class='file' onclick=\"postFileName('$folder$item')\">$item</div><br>";
-                    }
+                if ($item != '.' && $item != 'admin') {
+					if ($dir != '../'){
+						// If it's a directory, make it clickable
+						if (is_dir("$dir/$item") && $item == '..') {
+							echo "<div class='file' onclick=\"postFolderName('..')\">$item</div><br>";
+						}
+						else if (is_dir("$dir/$item")) {
+							echo "<div class='file' onclick=\"postFolderName('../$item')\">$item</div><br>";
+						} else {
+							// If it's a file, make the name clickable and post its name to another page
+							echo "<div class='file' onclick=\"postFileName('$folder$item')\">$item</div><br>";
+						}
+					}
+					else if ($item != '..' ){
+						// If it's a directory, make it clickable
+						if (is_dir("$dir/$item")) {
+							echo "<div class='file' onclick=\"postFolderName('../$item')\">$item</div><br>";
+						} else {
+							// If it's a file, make the name clickable and post its name to another page
+							echo "<div class='file' onclick=\"postFileName('$folder$item')\">$item</div><br>";
+						}
+					}
                 }
             }
             // Close the directory handle
@@ -99,6 +117,7 @@ function listFilesAndFolders($dir, $folder) {
             var form = document.createElement('form');
             form.method = 'post';
             form.action = 'change.php'; 
+			form.target = "_blank";
             var input = document.createElement('input');
             input.type = 'hidden';
             input.name = 'fileName';
