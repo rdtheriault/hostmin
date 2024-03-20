@@ -1,9 +1,17 @@
 <?php
-//if (!isset($_SESSION['access']) || $_SESSION['access'] !== 'I Have Access to this Page 1234!?') {
-    // If not, redirect to a different page or display an error message
-    //echo "You don't have access to this page!";
-    //exit;
-//}
+//make sure to keep track of location on refresh...
+if(session_status() === PHP_SESSION_NONE) session_start();
+
+$folders = explode("/", $_SERVER["PHP_SELF"]);
+
+if (!isset($_SESSION['user'] )){
+	echo 'Your session expired. Go <a href="../">here</a> to log in';
+	die();
+}
+if (strtolower($_SESSION['user']) != strtolower($folders[2])){
+	echo 'You are not authorized to be here. Go <a href="../">here</a> to log in';
+	die();
+}
 
 //get file name from post
 $fullfile = '../'.$_POST['fileName'];
