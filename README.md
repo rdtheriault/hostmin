@@ -30,7 +30,7 @@ Users will need to log into the same page as an admin. After doing so it will re
 2. At the "bottom" of the page the can add another file or folder. The system will not stop them from not adding an extension to a file or adding an extension to a folder.
 3. If they click on a file it will open to  new tab
 4. If they click on a folder, it will show that folders contents
-5. If they are not in their "root" folder, the dot dot will allow them to go back a folder (only goes one folder deep right now)
+5. If they are not in their "root" folder, the dot dot will allow them to go back a folder
 6. When the are one the change.php after clicking a file, they will see the contents of the file, they can change it, then save over the current contents with the changes.
 7. They will need to close the tab when done.
 8. There is no syntax highlighting at this time
