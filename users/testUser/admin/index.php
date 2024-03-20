@@ -1,4 +1,16 @@
 <?php
+if(session_status() === PHP_SESSION_NONE) session_start();
+
+$folders = explode("/", $_SERVER["PHP_SELF"]);
+
+if (!isset($_SESSION['user'] )){
+	echo 'Your session expired. Go <a href="../">here</a> to log in';
+	die();
+}
+if (strtolower($_SESSION['user']) != strtolower($folders[2])){
+	echo 'You are not authorized to be here. Go <a href="../">here</a> to log in';
+	die();
+}
 
 // Get the directory to list (default to the current directory)
 if (isset($_POST['fileName'])){
