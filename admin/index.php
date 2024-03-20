@@ -20,7 +20,7 @@ function addUser($name, $username, $password, $isAdmin, $db) {
     // Prepare SQL statement to insert user
     $stmt = $db->prepare("INSERT INTO users (name, username, password, admin) VALUES (:name, :username, :password, :admin)");
     $stmt->bindValue(':name', $name, SQLITE3_TEXT);
-    $stmt->bindValue(':username', $username, SQLITE3_TEXT);
+    $stmt->bindValue(':username', strtolower($username), SQLITE3_TEXT);
     $stmt->bindValue(':password', $hashedPassword, SQLITE3_TEXT);
     $stmt->bindValue(':admin', $isAdmin, SQLITE3_INTEGER);
     $result = $stmt->execute();
