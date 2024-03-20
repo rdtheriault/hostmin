@@ -10,12 +10,12 @@ Simple hosting solution to host/manage many websites with many users. The goal o
 
 ### Optional Setup
 1. Create database
-  -Download [SQLITE](https://www.sqlite.org/2024/sqlite-tools-win-x64-3450200.zip)
-  -There is a file in admin with the SQL commands
+  - Download [SQLITE](https://www.sqlite.org/2024/sqlite-tools-win-x64-3450200.zip)
+  - There is a file in admin with the SQL commands
 2. Add admin
-  -You will need to create an insert statement to add an admin
-  -`INSERT INTO users (name, username, password, admin) VALUES ('admin', 'administrator', 'notP@$$word1234', 1);`
-  -Change the values as needed
+  - You will need to create an insert statement to add an admin
+  - `INSERT INTO users (name, username, password, admin) VALUES ('admin', 'administrator', 'notP@$$word1234', 1);`
+  - Change the values as needed
 
 ## Use
 ### Create users
