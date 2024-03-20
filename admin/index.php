@@ -1,4 +1,15 @@
 <?php
+if(session_status() === PHP_SESSION_NONE){
+	session_start();
+}
+if (!isset($_SESSION['user'] )){
+	echo 'Your session expired. Go <a href="../">here</a> to log in';
+	die();
+}
+if ($_SESSION['user'] != "adminUser9876!"){
+	echo 'You are not authorized to be here. Go <a href="../">here</a> to log in';
+	die();
+}
 $db = new SQLite3('users.db');
 
 // Function to add a single user
@@ -21,6 +32,8 @@ function addUser($name, $username, $password, $isAdmin, $db) {
     // Copy files to user folder
     copy("files/index.php", "../users/$username/admin/index.php");
     copy("files/change.php", "../users/$username/admin/change.php");
+	
+	fopen("../users/$username/index.php", 'w');
 
     return $result;
 }
