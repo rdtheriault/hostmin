@@ -2,7 +2,7 @@
 Simple hosting solution to host/manage many websites with many users. The goal of this project is for CS teachers to have a low cost easy to manage web hosting server for student projects by mimicking cPanel (very loosely). This version is designed to work on a system as simple as a RaspberryPi. It could also run on a WAMP server running on the teacher/professor's computer. Security was not a major consideration for the project and most of the security just keeps students out of eachothers folders. Also, it is not meant to run on an online server (but in theory it could) thus students could only access it while on the same network as the server. I plan to make a more secure online version at some point. 
 
 ## Setup
-1. Ensure you have WAMP or LAMP set up on your server. 
+1. Ensure you have WAMP or [LAMP](https://ubuntu.com/server/docs/lamp-applications) set up on your server. 
 2. Copy the files from this repository into the main `www` folder.
 3. The files come with a SQLite database pre configured but also the SQL to create one of your own
 4. Additionally, it comes with a template CSV file to start to add users
