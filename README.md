@@ -37,3 +37,10 @@ Users will need to log into the same page as an admin. After doing so it will re
 
 ### Viewing
 Anyone can view any user website by simple typing `url/username`. 
+
+## Issues
+### SQLite3
+Make sure php-sqlite3 is installed. You will need to know your php version to install the correct version.
+
+### Permissions
+Depending on your setup, www-data (or other web user) might not have permission to create folders and files. You will need to make sure the user for the web has permissions to write files to the web folders (generall www on Linux).
